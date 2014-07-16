@@ -1,61 +1,50 @@
-<div class="pages">
-    <!-- Page Index-->
-    <div data-page="index" class="page navbar-fixed toolbar-fixed">
-        <div class="navbar">
-            <div class="navbar-inner">
-                <div class="center">
-                    <img class="logo-image" src="img/logo.png" alt="ohFresh探鲜家"/>
+<div class="page-content">
+    <form name="loginForm" class="list-block inset" method="post" ng-submit="loginFormSubmit()">
+        <ul>
+            <li class="item-divider">
+                管理员登录
+            </li>
+            <li class="item-content">
+                <div class="item-media">
+                    <i class="icon icon-form-name"></i>
                 </div>
-            </div>
-        </div>
-        <div class="page-content">
-            <form name="loginForm" class="list-block inset" method="post" ng-submit="loginFormSubmit()">
-                <ul>
-                    <li class="item-divider">
-                        管理员登录
-                    </li>
-                    <li class="item-content">
-                        <div class="item-media">
-                            <i class="icon icon-form-name"></i>
-                        </div>
-                        <div class="item-inner">
-                            <div class="item-input" ng-init="accountHasInput=false">
-                                <input type="text" name="account" ng-init="account = ''" ng-model="account"
-                                       placeholder="用户名/手机号" required autofocus
-                                       ng-blur="accountHasInput = true"
-                                       ng-pattern="/^(1[0-9]{10,11})|^([a-zA-Z0-9]|[_]){3,20}$/"
-                                       ng-minlength="3" ng-maxlength="20"/>
+                <div class="item-inner">
+                    <div class="item-input" ng-init="accountHasInput=false">
+                        <input type="text" name="account" ng-init="account = ''" ng-model="account"
+                               placeholder="用户名/手机号" required autofocus
+                               ng-blur="accountHasInput = true"
+                               ng-pattern="/^(1[0-9]{10,11})|^([a-zA-Z0-9]|[_]){3,20}$/"
+                               ng-minlength="3" ng-maxlength="20"/>
                                 <span class="error"
                                       ng-show="accountHasInput&&loginForm.account.$error.required">不能为空！</span>
                             <span class="error"
                                   ng-show="accountHasInput&&!loginForm.account.$valid">只能输入3-20位可以包含英文字母、数字、或“_”组成的字串！</span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="item-content">
-                        <div class="item-media">
-                            <i class="icon icon-form-password"></i>
-                        </div>
-                        <div class="item-inner">
-                            <div class="item-input" ng-init="passwordHasInput = false">
-                                <input type="password" name="password" ng-init="password = ''" ng-model="password"
-                                       placeholder="密码" required
-                                       ng-blur="passwordHasInput=true"
-                                       ng-pattern="/^([a-zA-Z0-9]|[_]){5,19}$/"
-                                       ng-minlength="6" ng-maxlength="20"/>
-                                <span class="error" ng-show="passwordHasInput && loginForm.password.$error.required">不能为空！</span>
+                    </div>
+                </div>
+            </li>
+            <li class="item-content">
+                <div class="item-media">
+                    <i class="icon icon-form-password"></i>
+                </div>
+                <div class="item-inner">
+                    <div class="item-input" ng-init="passwordHasInput = false">
+                        <input type="password" name="password" ng-init="password = ''" ng-model="password"
+                               placeholder="密码" required
+                               ng-blur="passwordHasInput=true"
+                               ng-pattern="/^([a-zA-Z0-9]|[_]){5,19}$/"
+                               ng-minlength="6" ng-maxlength="20"/>
+                        <span class="error"
+                              ng-show="passwordHasInput && loginForm.password.$error.required">不能为空！</span>
                                 <span class="error"
                                       ng-show="passwordHasInput && !loginForm.password.$valid">只能输入6-20位可以包含英文字母、数字、“_”的字串！</span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="item-content">
-                        <div class="item-inner">
-                            <input type="submit" class="button button-submit button-big" value="登录"/>
-                        </div>
-                    </li>
-                </ul>
-            </form>
-        </div>
-    </div>
+                    </div>
+                </div>
+            </li>
+            <li class="item-content">
+                <div class="item-inner">
+                    <input type="submit" class="button button-submit button-big" value="登录"/>
+                </div>
+            </li>
+        </ul>
+    </form>
 </div>

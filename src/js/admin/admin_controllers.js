@@ -2,8 +2,9 @@ define(['../application',
     '../settings'
 ], function (OhFresh, Settings) {
     angular.module('ohFresh.admin.controllers', ['ngCookies'])
-        .controller('LoginCtrl', ['$scope', '$http', '$location', '$cookieStore',
-            function ($scope, $http, $location, $cookieStore) {
+        .controller('LoginCtrl', ['$scope', '$http', '$location', '$cookieStore', '$rootScope',
+            function ($scope, $http, $location, $cookieStore, $rootScope) {
+                $rootScope.$broadcast('back.change', null);
                 $scope.loginFormSubmit = function () {
                     if ($scope.loginForm.$valid) {
                         var codeReg = new RegExp('^[a-zA-Z]{1}([a-zA-Z0-9]|[._-]){5,19}$');

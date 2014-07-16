@@ -4,6 +4,7 @@ define(['../application',
     angular.module('ohFresh.order.controllers', ['ngCookies'])
         .controller('OrderListCtrl', ['$scope', '$cookieStore', '$rootScope', '$location', '$http',
             function ($scope, $cookieStore, $rootScope, $location, $http) {
+                $rootScope.$broadcast('back.change', {url: '#/home'});
                 var admin = $cookieStore.get('admin');
                 if (!admin) {
                     return $location.path('/admin/login');
@@ -19,7 +20,6 @@ define(['../application',
                         url += "&userId=" + (admin ? admin.id : '');
                     $http.jsonp(url).success(function (data) {
                         OhFresh.hidePreloader();
-                        console.log(data);
                         $scope.orders = data;
                     }).error(function () {
                         OhFresh.hidePreloader();
@@ -84,6 +84,7 @@ define(['../application',
                     return total;
                 };
                 $scope.showDetails = function (order) {
+                    $rootScope.$broadcast('back.change', {url: '#/order/list?token=' + new Date().getMilliseconds()});
                     $scope.index = 1;
                     $scope.currentOrder = order;
                 };

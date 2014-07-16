@@ -3,6 +3,7 @@ define(['../application',
     angular.module('ohFresh.home.controllers', ['ngRoute', 'ngCookies'])
         .controller('HomeCtrl', ['$scope', '$routeParams', '$cookieStore', '$http', '$rootScope', '$location',
             function ($scope, $routeParams, $cookieStore, $http, $rootScope, $location) {
+                $rootScope.$broadcast('back.change', null);
                 var admin = $cookieStore.get('admin');
                 if (!admin) {
                     return $location.url('/admin/login');
