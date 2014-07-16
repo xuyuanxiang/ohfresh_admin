@@ -1,0 +1,168 @@
+<div class="pages" ng-init="index=0">
+    <!-- Page Index-->
+    <div ng-show="index==0" data-page="index" class="page navbar-fixed toolbar-fixed">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="left">
+                    <a href="#/home" class="link external">
+                        <i class="icon icon-back-white"></i>
+                        <span>返回</span>
+                    </a>
+                </div>
+                <div class="center">
+                    <img class="logo-image" src="img/logo.png" alt="ohFresh探鲜家"/>
+                </div>
+            </div>
+        </div>
+
+        <form class="searchbar" name="searchForm" ng-submit="doSearch()">
+            <div class="searchbar-input">
+                <input ng-blur="doSearch()" ng-model="keywords" type="search"
+                       placeholder="关键词：客户姓名、手机号、批次号"/>
+            </div>
+        </form>
+        <div class="page-content">
+            <div class="content-block">
+                <div class="buttons-row">
+                    <a ng-click="changeStatus(0)" ng-class="status == 0?'active':''" class="tab-link button">未处理</a>
+                    <a ng-click="changeStatus(1)" ng-class="status == 1?'active':''" class="tab-link button">已处理</a>
+                </div>
+            </div>
+            <div class="list-block media-list">
+                <ul>
+                    <li ng-show="ordersTotalPrice()" class="item-divider">
+                        总计收款金额：<span class="fa fa-yen">{{ordersTotalPrice()}}</span>
+                    </li>
+                    <li ng-repeat="order in orders">
+                        <a ng-click="showDetails(order)" class="item-link item-content">
+                            <div class="item-inner">
+                                <div ng-repeat-start="detail in order.orderDetail" class="item-title-row">
+                                    <div class="item-title">
+                                        {{order.customer}}
+                                    </div>
+                                    <div class="item-after">
+                                        <span>合计： <span class="fa fa-yen">{{totalPrice(order)}}</span></span>
+                                    </div>
+                                </div>
+                                <div class="item-subtitle">
+                                    {{order.mobilephone}}
+                                </div>
+                                <div ng-repeat-end class="item-text">
+                                    {{$index + 1}}.<strong>{{detail.productname}}</strong>
+                                    <em> 单价：</em><strong><span class="fa fa-yen">{{detail.productprice}}</span></strong>
+                                    <em ng-show="detail.freight"> 运费：</em><strong ng-show="detail.freight"><span
+                                        class="fa fa-yen">{{detail.freight}}</span></strong>
+                                    <em> 数量：</em><strong>{{detail.count}}</strong>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Index-->
+    <div ng-show="index==1" data-page="index" class="page navbar-fixed toolbar-fixed">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="left">
+                    <a ng-click="index=0" class="link">
+                        <i class="icon icon-back-white"></i>
+                        <span>返回</span>
+                    </a>
+                </div>
+                <center class="center sliding">
+                    <img class="logo-image" src="img/logo.png" alt="ohFresh探鲜家"/>
+                </center>
+            </div>
+        </div>
+
+        <div class="page-content">
+            <div class="content-block-title">
+                订单号：{{currentOrder.id}}
+            </div>
+            <form name="orderDealForm" class="list-block" method="post" ng-submit="orderDealSubmit()">
+                <ul>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">
+                                {{currentOrder.customer}}
+                            </div>
+                            <div class="item-after">
+                                {{currentOrder.mobilephone}}
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-divider" ng-repeat-start="item in currentOrder.orderDetail">
+                        {{$index+1}}.{{item.productname}}
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">
+                                单价：
+                            </div>
+                            <div class="item-input">
+                                <input ng-disabled="currentOrder.status==1" type="number" name="productprice"
+                                       ng-model="item.productprice"
+                                       ng-required="true"/>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">
+                                运费：
+                            </div>
+                            <div class="item-input">
+                                <input ng-disabled="currentOrder.status==1" type="number" name="freight"
+                                       ng-model="item.freight"
+                                       ng-required="true"/>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content" ng-repeat-end>
+                        <div class="item-inner">
+                            <div class="item-title label">
+                                数量：
+                            </div>
+                            <div class="item-input">
+                                <input ng-disabled="currentOrder.status==1" type="number" name="count"
+                                       ng-model="item.count"
+                                       ng-required="true"/>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">
+                                备注：
+                            </div>
+                            <div class="item-input align-top">
+                                <textarea ng-disabled="currentOrder.status==1" name="memo"
+                                          ng-model="currentOrder.memo"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">
+                                合计：
+                            </div>
+                            <div class="item-after">
+                                <span class="fa fa-yen">
+                                    {{totalPrice(currentOrder)}}
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+                    <li ng-show="currentOrder.status==0" class="item-content">
+                        <div class="item-inner">
+                            <input type="submit" class="button button-submit button-big" value="确定"/>
+                        </div>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+</div>
