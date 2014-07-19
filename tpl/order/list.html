@@ -5,14 +5,16 @@
     </div>
 </form>
 <div ng-show="index==0" class="page-content">
-    <div class="content-block">
-        <div class="buttons-row">
-            <a ng-click="changeStatus(0)" ng-class="status == 0?'active':''" class="tab-link button">未处理</a>
-            <a ng-click="changeStatus(1)" ng-class="status == 1?'active':''" class="tab-link button">已处理</a>
-        </div>
-    </div>
     <div class="list-block media-list">
         <ul>
+            <li class="item-content">
+                <div class="item-inner">
+                    <div class="buttons-row">
+                        <a ng-click="changeStatus(0)" ng-class="status == 0?'active':''" class="tab-link button">未处理</a>
+                        <a ng-click="changeStatus(1)" ng-class="status == 1?'active':''" class="tab-link button">已处理</a>
+                    </div>
+                </div>
+            </li>
             <li ng-show="ordersTotalPrice()" class="item-divider">
                 总计收款金额：<span class="fa fa-yen">{{ordersTotalPrice()}}</span>
             </li>
@@ -43,25 +45,34 @@
         </ul>
     </div>
 </div>
-
-<div class="page-content" ng-show="index==1">
-    <div class="content-block-title">
-        订单号：{{currentOrder.id}}
-    </div>
+<div class="page-content" ng-show="index==1" style="margin-top: -35px">
     <form name="orderDealForm" class="list-block" method="post" ng-submit="orderDealSubmit()">
         <ul>
+            <li class="item-divider">
+                <small>订单号:
+                    {{currentOrder.id}}
+                </small>
+            </li>
             <li class="item-content">
                 <div class="item-inner">
                     <div class="item-title label">
-                        {{currentOrder.customer}}
+                        <span class="fa fa-user-md"></span> {{currentOrder.customer}}
                     </div>
                     <div class="item-after">
-                        {{currentOrder.mobilephone}}
+                        <span class="fa fa-mobile-phone"> {{currentOrder.mobilephone}}</span>
                     </div>
                 </div>
             </li>
-            <li class="item-divider" ng-repeat-start="item in currentOrder.orderDetail">
-                {{$index+1}}.{{item.productname}}
+
+            <li class="item-content" ng-repeat-start="item in currentOrder.orderDetail">
+                <div class="item-inner">
+                    <div class="item-title label">
+                        商品：
+                    </div>
+                    <div class="item-input">
+                        {{item.productname}}
+                    </div>
+                </div>
             </li>
             <li class="item-content">
                 <div class="item-inner">
@@ -99,7 +110,7 @@
                     </div>
                 </div>
             </li>
-            <li class="item-content">
+            <li class="item-content align-top">
                 <div class="item-inner">
                     <div class="item-title label">
                         备注：
@@ -107,6 +118,26 @@
                     <div class="item-input align-top">
                         <textarea ng-disabled="currentOrder.status==1" name="memo"
                                   ng-model="currentOrder.memo"></textarea>
+                    </div>
+                </div>
+            </li>
+            <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title label">
+                        创建日期：
+                    </div>
+                    <div class="item-after">
+                        {{currentOrder.createdate.time | amDateFormat:'YYYY MMMM Do dddd'}}
+                    </div>
+                </div>
+            </li>
+            <li class="item-content" ng-show="currentOrder.status==1">
+                <div class="item-inner">
+                    <div class="item-title label">
+                        处理日期：
+                    </div>
+                    <div class="item-after">
+                        {{currentOrder.tradedate.time | amDateFormat:'YYYY MMMM Do dddd'}}
                     </div>
                 </div>
             </li>

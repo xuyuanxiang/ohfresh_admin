@@ -46,6 +46,9 @@ module.exports = function (grunt) {
                         'bower_components/angular/angular.js',
                         'bower_components/angular-route/angular-route.js',
                         'bower_components/angular-cookies/angular-cookies.js',
+                        'bower_components/moment/min/moment.min.js',
+                        'bower_components/moment/lang/zh-cn.js',
+                        'bower_components/angular-moment/angular-moment.min.js',
                         'bower_components/requirejs/require.js'
                     ]
                 }

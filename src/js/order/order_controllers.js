@@ -1,7 +1,7 @@
 define(['../application',
     '../settings'
 ], function (OhFresh, Settings) {
-    angular.module('ohFresh.order.controllers', ['ngCookies'])
+    angular.module('ohFresh.order.controllers', ['ngCookies', 'angularMoment'])
         .controller('OrderListCtrl', ['$scope', '$cookieStore', '$rootScope', '$location', '$http',
             function ($scope, $cookieStore, $rootScope, $location, $http) {
                 $rootScope.$broadcast('back.change', {url: '#/home'});
@@ -20,6 +20,7 @@ define(['../application',
                         url += "&userId=" + (admin ? admin.id : '');
                     $http.jsonp(url).success(function (data) {
                         OhFresh.hidePreloader();
+                        console.log(data);
                         $scope.orders = data;
                     }).error(function () {
                         OhFresh.hidePreloader();
