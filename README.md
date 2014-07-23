@@ -24,7 +24,7 @@ ohFresh|探鲜家卖家版前端工程。
   ```
   $ grunt build
   ```
-  * 启动项目（http://localhost:3100/）
+  * 启动项目
   ```
   $ grunt server
   ```
