@@ -1,9 +1,15 @@
 define(['../application',
     '../settings'
 ], function (OhFresh, Settings) {
-    angular.module('ohFresh.admin.controllers', ['ngCookies'])
-        .controller('LoginCtrl', ['$scope', '$http', '$location', '$cookieStore', '$rootScope',
-            function ($scope, $http, $location, $cookieStore, $rootScope) {
+    angular.module('ohFresh.admin.controllers', ['ngCookies', 'ngRoute'])
+        .controller('LoginCtrl', ['$scope', '$http', '$location', '$cookieStore', '$rootScope', '$routeParams',
+            function ($scope, $http, $location, $cookieStore, $rootScope, $routeParams) {
+                $scope.admin = $cookieStore.get('admin');
+                var currentId = $routeParams.id;
+                if ($scope.admin && currentId) {
+                    $location.url('/order/list?customerId=' + currentId);
+                    return;
+                }
                 $rootScope.$broadcast('back.change', null);
                 $scope.loginFormSubmit = function () {
                     if ($scope.loginForm.$valid) {
@@ -46,7 +52,11 @@ define(['../application',
                                     if ('登录成功！' === message) {
                                         data.password = '';
                                         $cookieStore.put('admin', data);
-                                        $location.path('/home');
+                                        if (currentId) {
+                                            $location.url('/order/list?customerId=' + currentId);
+                                        } else {
+                                            $location.url('/home');
+                                        }
                                     }
                                 } else {
                                     OhFresh.addNotification({

@@ -1,14 +1,15 @@
 define(['../application',
     '../settings'
 ], function (OhFresh, Settings) {
-    angular.module('ohFresh.order.controllers', ['ngCookies', 'angularMoment'])
-        .controller('OrderListCtrl', ['$scope', '$cookieStore', '$rootScope', '$location', '$http',
-            function ($scope, $cookieStore, $rootScope, $location, $http) {
+    angular.module('ohFresh.order.controllers', ['ngCookies', 'angularMoment', 'ngRoute'])
+        .controller('OrderListCtrl', ['$scope', '$cookieStore', '$rootScope', '$location', '$http', '$routeParams',
+            function ($scope, $cookieStore, $rootScope, $location, $http, $routeParams) {
                 $rootScope.$broadcast('back.change', {url: '#/home'});
                 var admin = $cookieStore.get('admin');
                 if (!admin) {
                     return $location.path('/admin/login');
                 }
+                var customerId = $routeParams.customerId;
                 $rootScope.$broadcast('back.show');
                 $scope.changeStatus = function (value) {
                     if ($scope.status == value)
@@ -16,6 +17,8 @@ define(['../application',
                     OhFresh.showPreloader();
                     $scope.status = value;
                     var url = Settings.orderQuery + "&status=" + $scope.status;
+                    if (customerId)
+                        url += "&customerId=" + customerId;
                     if ($scope.status == 1)
                         url += "&userId=" + (admin ? admin.id : '');
                     $http.jsonp(url).success(function (data) {
@@ -35,22 +38,24 @@ define(['../application',
                 $scope.doSearch = function () {
                     OhFresh.showPreloader();
                     var mobileReg = new RegExp('^1[0-9]{10,11}$');
-                    var codeReg = new RegExp('^[0-9]{13}');
-                    var nameReg = new RegExp('(?:[\u4E00-\u9FFF]{1,8}·\u4E00-\u9FFF]{1,8})|(?:[\u4E00-\u9FFF]{2,5})|(^[a-zA-Z]{1,30}$)');
+//                    var nameReg = new RegExp('(?:[\u4E00-\u9FFF]{1,8}·\u4E00-\u9FFF]{1,8})|(?:[\u4E00-\u9FFF]{2,5})|(^[a-zA-Z]{1,30}$)');
                     var url = Settings.orderQuery + "&status=" + $scope.status;
+                    if ($scope.status == 1)
+                        url += "&userId=" + admin.id;
+                    if (customerId)
+                        url += "&customerId=" + customerId;
                     var keywords = $scope.keywords ? $scope.keywords.split(',') : [];
                     var mobile = '';
                     var name = '';
                     var no = '';
-                    angular.forEach(keywords, function (value) {
+                    for (var i = 0; i < keywords.length; i++) {
+                        var value = keywords[i];
                         if (mobileReg.test(value)) {
                             mobile = value;
-                        } else if (nameReg.test(value)) {
+                        } else {
                             name = value;
-                        } else if (codeReg.test(value)) {
-                            no = value;
                         }
-                    });
+                    }
                     url += '&mobilephone=' + mobile;
                     url += '&customerName=' + name;
                     url += '&productBitchNo=' + no;
