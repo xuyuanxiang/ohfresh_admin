@@ -18,6 +18,8 @@ ohFresh|探鲜家卖家版前端工程。
   * 安装项目依赖
   ```
   $ npm install
+  ```
+  ```
   $ bower install
   ```
   * 构建项目
