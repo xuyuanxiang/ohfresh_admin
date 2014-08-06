@@ -1,0 +1,44 @@
+/* CSS Document */
+.grey_area{ width:100%; text-align:center; padding:15px 0 20px 0;background:#F1F1F3;  height:auto;overflow:hidden; text-align:center;}
+.search_blank{ float:left; width:252px;height:26px;line-height:26px;}
+.p_blank{border:1px solid #ccc;background:#FFF; margin:10px 10px 15px 10px;; overflow:hidden; padding:3px 0px 3px 10px;}
+
+
+
+/*四个按钮*/
+.seller_menu{ margin:0 auto; clear:both; width:253px;}
+.seller_menu li{ float:left; font-size:13px; text-align:center;}
+.S_menu1,.S_menu2,.S_menu3,.S_menu4{ display:block; width:33px; height:33px;}
+.S_menu1{ background:url(../image/icon11.png) no-repeat; background-size:100%;}
+.S_menu1:hover{background:url(../image/icon11_on.png) no-repeat;background-size:100%;}
+.S_menu2{ background:url(../image/icon12.png) no-repeat; background-size:100%;}
+.S_menu2:hover{background:url(../image/icon12_on.png) no-repeat;background-size:100%;}
+.S_menu3{ background:url(../image/icon13.png) no-repeat; background-size:100%;}
+.S_menu3:hover{background:url(../image/icon13_on.png) no-repeat;background-size:100%;}
+.S_menu4{ background:url(../image/icon14.png) no-repeat; background-size:100%;}
+.S_menu4:hover{background:url(../image/icon14_on.png) no-repeat;background-size:100%;}
+/*四个按钮*/
+
+/*Tap标签*/
+.seller_menu p{ margin-top:5px;}
+.Tap_area{clear:both; border:1px solid #fff; border-left:none; border-right:none;}
+.Tap_choose,.Tap{ display:block; float:left; font-size:13px; color:#FFF;height:30px; line-height:30px; width:50%; text-align:center;}
+.Tap_choose{ background:url(../image/bg_2.jpg) repeat-x ; background-size:100%;}
+.Tap{ background:#1AB5FF; text-decoration:none;}
+.Tap:hover{ background:#197BBD;}
+/*Tap标签*/
+
+/*订单区*/
+.buyer{background:#DDEEFF;height:30px; padding:0 15px;}
+.name{ display:block;float:left;color:#19318A; }
+.phone{ display:block; float:left; padding-left:15px; color:#666666; text-decoration:none;}
+.item_area{ line-height:30px;}
+.space{height:30px; line-height:30px;}
+.preduct{ padding:12px 15px; height:auto; overflow:hidden; position:relative;}
+.P_title{ float:left; width:215px; padding-right:10px; line-height:24px;}
+.Price{ float:left;line-height:24px; text-align:right; color:#B3B3B3; width:65px;}
+.Price_all_area{ text-align:right; font-weight:bold; padding-right:15px; padding-bottom:5px;}
+.Bt_blue_area{ position:absolute; right:0; top:0;background:#FFF; padding:10px 0 15px 0;}
+.Bt_blue_area a{background:#299DE8;padding:5px 10px;border-radius:2px;behavior: url(ie-css3.htc); color:#FFF; text-decoration:none; margin-right:10px;}
+.Bt_blue_area a:hover{background:#177ABC;}
+/*订单区*/

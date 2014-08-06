@@ -3,88 +3,97 @@ module.exports = function (grunt) {
         pkg: grunt.file.readJSON('package.json'),
 
         clean: {
-            less: ["css/<%= pkg.name %>-<%= pkg.version %>.css"],
-            product: ["css/**/*.css", "dist/*", "js/**/*.js", "img/*", "fonts/*"]
+            develop: ["js/*"],
+            product: ["dist/*"]
         },
 
-        less: {
-            develop: {
-                files: {
-                    "css/<%= pkg.name %>-<%= pkg.version %>.css": "src/less/ohFresh.less"
-                }
-            },
-            product: {
+        ngtemplates: {
+            "template": {
+                cwd: 'src/tpl',
+                src: '**/*.html',
+                dest: 'js/<%= pkg.name %>-<%= pkg.version %>-tpl.js',
                 options: {
-                    paths: ["css"],
-                    cleancss: true
-                },
-                files: {
-                    "css/<%= pkg.name %>-<%= pkg.version %>.min.css": "src/less/ohFresh.less"
+                    htmlmin: { collapseWhitespace: true, collapseBooleanAttributes: true },
+                    bootstrap: function (module, script) {
+                        return '(function(angular){angular.module("ohFreshAdmin.template",[]).run(["$templateCache",function($templateCache){' + script + '}]);})(angular);';
+                    }
                 }
             }
         },
 
         uglify: {
+            dependencies: {
+                files: {
+                    'dist/js/vendor.min.js': [
+                        'bower_components/jquery/dist/jquery.js',
+                        'bower_components/moment/moment.js',
+                        'bower_components/moment/lang/zh-cn.js',
+                        'bower_components/angular/angular.js',
+                        'bower_components/angular-route/angular-route.js',
+                        'bower_components/angular-touch/angular-touch.js',
+                        'bower_components/angular-moment/angular-moment.js',
+                        'bower_components/angular-local-storage/angular-local-storage.js'
+                    ]
+                }
+            },
             product: {
                 options: {
                     banner: '/*!\n * @overview <%= pkg.name %>\n * @author <%= pkg.author%>\n * @version <%= pkg.version %>\n * @date <%= grunt.template.today("yyyy-mm-dd") %>\n */\n'
                 },
-                files: [
-                    {
-                        expand: true,
-                        cwd: 'src',
-                        src: ['js/**/*.js'],
-                        dest: 'dist'
-                    }
-                ]
-            },
-            dependencies: {
+
                 files: {
-                    'dist/js/vendor/dependencies.min.js': [
-                        'bower_components/jquery/dist/jquery.js',
-                        'bower_components/framework7/dist/js/framework7.js',
-                        'bower_components/angular/angular.js',
-                        'bower_components/angular-route/angular-route.js',
-                        'bower_components/angular-cookies/angular-cookies.js',
-                        'bower_components/moment/min/moment.min.js',
-                        'bower_components/moment/lang/zh-cn.js',
-                        'bower_components/angular-moment/angular-moment.min.js',
-                        'bower_components/requirejs/require.js'
+                    'dist/js/<%= pkg.name %>-<%= pkg.version %>.min.js': [
+                        'src/js/application.js',
+                        'src/js/settings.js',
+                        'src/js/service/**/*.js',
+                        'src/js/controller/**/*.js',
+                        'src/js/routes.js'
+                    ]
+                }
+            },
+            template: {
+                options: {
+                    banner: '/*!\n * @overview <%= pkg.name %>-template\n * @author <%= pkg.author%>\n * @version <%= pkg.version %>\n * @date <%= grunt.template.today("yyyy-mm-dd") %>\n */\n'
+                },
+                files: {
+                    'dist/js/<%= pkg.name %>-<%= pkg.version %>-tpl.min.js': [
+                        'js/<%= pkg.name %>-<%= pkg.version %>-tpl.js'
                     ]
                 }
             }
         },
 
-        concat: {
-            style: {
-                src: [
-                    'css/<%= pkg.name %>-<%= pkg.version %>.min.css',
-                    'bower_components/fontawesome/css/font-awesome.min.css'
-                ],
-                dest: 'dist/css/<%= pkg.name %>-<%= pkg.version %>-all.min.css'
+        cssmin: {
+            product: {
+                options: {
+                    banner: '/*!\n * @overview <%= pkg.name %>\n * @author yangfang@tjpower.com.cn\n * @version <%= pkg.version %>\n * @date <%= grunt.template.today("yyyy-mm-dd") %>\n */\n'
+                },
+                files: {
+                    'dist/css/<%= pkg.name %>-<%= pkg.version %>-all.min.css': ['src/css/**/*.css', 'bower_components/animate-css/animate.css']
+                }
             }
-//            script: {
-//                src: [
-//                    'js/vendor/jquery-jquery.cookie-framework7.min.js',
-//                    'js/<%= pkg.name %>-<%= pkg.version %>.min.js'
-//                ],
-//                dest: 'dist/js/<%= pkg.name %>-<%= pkg.version %>-all.min.js'
-//            }
+        },
+
+        concat: {
+            product: {
+                src: [
+                    'dist/js/vendor.min.js',
+                    'dist/js/<%= pkg.name %>-<%= pkg.version %>-tpl.min.js',
+                    'dist/js/<%= pkg.name %>-<%= pkg.version %>.min.js'
+                ],
+                dest: 'dist/js/<%= pkg.name %>-<%= pkg.version %>-all.min.js'
+            }
         },
 
         copy: {
             develop: {
                 files: [
-                    {expand: true, cwd: 'bower_components/fontawesome/fonts/', src: ['*'], dest: 'fonts/'},
-                    {expand: true, cwd: 'bower_components/fontawesome/css/', src: ['*.min.css'], dest: 'css/'},
-                    {expand: true, cwd: 'bower_components/framework7/dist/img/', src: ['*'], dest: 'img/'}
+                    {expand: true, cwd: 'src/image', src: ['*'], dest: 'image/'}
                 ]
             },
             product: {
                 files: [
-                    {expand: true, cwd: 'bower_components/fontawesome/', src: ['fonts/*'], dest: 'dist/'},
-                    {expand: true, cwd: 'bower_components/framework7/dist/img/', src: ['*'], dest: 'dist/img/'},
-                    {expand: true, src: ['img/*'], dest: 'dist/'}
+                    {expand: true, cwd: 'src/image', src: ['*'], dest: 'dist/image'}
                 ]
             }
         },
@@ -94,9 +103,9 @@ module.exports = function (grunt) {
                 files: [
                     {
                         expand: true,
-                        cwd: 'src/img',
+                        cwd: 'src/image',
                         src: ['*.{png,jpg,gif}'],
-                        dest: 'img'
+                        dest: 'image'
                     }
                 ]
             }
@@ -111,17 +120,6 @@ module.exports = function (grunt) {
                 files: {
                     'dist/index.html': 'dist_index.html'
                 }
-            },
-            tpl: {
-                options: {
-                    removeComments: true,
-                    collapseWhitespace: true
-                },
-                files: {
-                    'dist/tpl/admin/login.html': 'tpl/admin/login.html',
-                    'dist/tpl/home/home.html': 'tpl/home/home.html',
-                    'dist/tpl/order/list.html': 'tpl/order/list.html'
-                }
             }
         },
 
@@ -129,13 +127,13 @@ module.exports = function (grunt) {
             grunt: {
                 files: ['Gruntfile.js']
             },
-            less: {
-                files: ['src/less/**/*.less'],
-                tasks: ['clean:less', 'less:develop']
-            },
             img: {
-                files: ['src/img/**'],
+                files: ['src/image/**'],
                 tasks: ['imagemin']
+            },
+            tpl: {
+                files: ['src/tpl/**'],
+                tasks: ['ngtemplates']
             }
         },
 
@@ -158,16 +156,16 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-open');
+    grunt.loadNpmTasks('grunt-angular-templates');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
 
     grunt.registerTask('server', ['connect', 'open', 'watch']);
-    grunt.registerTask('cleanAll', ['clean:product']);
-    grunt.registerTask('build', ['clean:less', 'less:develop', 'imagemin', 'copy:develop']);
-    grunt.registerTask('publish', ['clean', 'less:product', 'uglify', 'concat', 'imagemin', 'htmlmin', 'copy:product']);
-    grunt.registerTask('devlop', ['clean:less', 'less:develop', 'watch']);
+    grunt.registerTask('cleanAll', ['clean']);
+    grunt.registerTask('build', ['clean:develop', 'ngtemplates', 'copy:develop']);
+    grunt.registerTask('publish', ['clean:product', 'ngtemplates', 'uglify', 'htmlmin', 'cssmin', 'copy:product', 'concat']);
+    grunt.registerTask('devlop', ['clean:develop', 'ngtemplates', 'copy:develop', 'watch']);
 }

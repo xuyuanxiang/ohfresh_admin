@@ -1,56 +1,43 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html>
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
     <meta name="mobileOptimized" content="width">
     <meta name="handheldFriendly" content="true">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <title>ohFresh | 探鲜家</title>
-    <link rel="stylesheet" href="css/ohfresh-admin-0.0.1.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <title>探鲜家</title>
+    <link href="src/css/global.css" rel="stylesheet" type="text/css">
+    <link href="src/css/index.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="src/css/List.css"/>
+    <link rel="stylesheet" type="text/css" href="src/css/Myhome.css"/>
+    <link rel="stylesheet" type="text/css" href="bower_components/animate-css/source/_base.css"/>
+    <link rel="stylesheet" type="text/css" href="bower_components/animate-css/source/fading_entrances/fadeInRight.css"/>
+    <link rel="stylesheet" type="text/css" href="bower_components/animate-css/source/fading_exits/fadeOutRight.css"/>
 </head>
-<body class="init">
-<div class="statusbar-overlay"></div>
 
-<div class="views">
-    <div class="view view-main" ng-controller="RootCtrl">
-        <div class="navbar">
-            <div class="navbar-inner">
-                <div class="left">
-                    <a ng-disabled="!backUrl" ng-href="{{backUrl}}" class="link icon-only external back">
-                        <i ng-show="backUrl" class="icon icon-back-white"></i>
-                    </a>
-                </div>
-                <div class="center sliding">
-                    <img class="logo-image" src="img/logo.png" alt="ohFresh探鲜家"/>
-                </div>
-            </div>
-            <!-- ./navbar-inner -->
-        </div>
-        <!-- ./navbar -->
-
-        <div class="pages navbar-through toolbar-through">
-            <!-- Page Index-->
-            <div data-page="index" class="page ng-view">
-            </div>
-            <!-- ./Page Index -->
-        </div>
-        <!-- ./pages -->
-    </div>
-    <!-- ./view view-main -->
-</div>
-<!-- ./views -->
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
-<script src="bower_components/framework7/dist/js/framework7.min.js"></script>
-<script src="bower_components/angular/angular.min.js"></script>
-<script src="bower_components/angular-route/angular-route.min.js"></script>
-<script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
-<script src="bower_components/moment/min/moment.min.js"></script>
-<script src="bower_components/moment/lang/zh-cn.js"></script>
-<script src="bower_components/angular-moment/angular-moment.min.js"></script>
-<script data-main="src/js/index" src="bower_components/requirejs/require.js"></script>
+<body>
+<div class="ng-view"></div>
+<script src="bower_components/jquery/dist/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="bower_components/moment/min/moment.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="bower_components/moment/lang/zh-cn.js" type="text/javascript" charset="utf-8"></script>
+<script src="bower_components/angular/angular.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="bower_components/angular-route/angular-route.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="bower_components/angular-touch/angular-touch.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="bower_components/angular-moment/angular-moment.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="bower_components/angular-local-storage/angular-local-storage.min.js" type="text/javascript"
+        charset="utf-8"></script>
+<script src="src/js/settings.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/ohfresh-admin-0.0.1-tpl.js"></script>
+<script src="src/js/application.js" type="text/javascript" charset="utf-8"></script>
+<script src="src/js/service/admin_service.js" type="text/javascript" charset="utf-8"></script>
+<script src="src/js/service/order_service.js" type="text/javascript" charset="utf-8"></script>
+<script src="src/js/controller/home_controller.js" type="text/javascript" charset="utf-8"></script>
+<script src="src/js/controller/login_controller.js" type="text/javascript" charset="utf-8"></script>
+<script src="src/js/controller/order_list_controller.js" type="text/javascript" charset="utf-8"></script>
+<script src="src/js/routes.js" type="text/javascript" charset="utf-8"></script>
 </body>
 </html>

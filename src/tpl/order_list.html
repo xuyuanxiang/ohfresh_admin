@@ -1,0 +1,97 @@
+<div id="head_LMR">
+	<p class="p3">
+		<a class="add"></a>
+	</p>
+	<p class="p1">
+		<a href="#" class="reback"></a>
+	</p>
+	<span>
+		<img src="image/logo2.png" width="182" height="23">
+	</span>
+</div>
+
+<div class="grey_area">
+	<p class="p_blank radius3">
+		<input name="text" type="text" class="border_none search_blank" value="姓名、电话或者微信号" >
+		<a href="#" class="Bt_search"></a>
+	</p>
+	<ul class="seller_menu">
+		<li>
+			<a class="S_menu1"></a>
+			<p>
+				付款
+			</p>
+		</li>
+		<li class="w_30">
+			&nbsp;
+		</li>
+		<li>
+			<a class="S_menu2"></a>
+			<p>
+				发货
+			</p>
+		</li>
+		<li class="w_30">
+			&nbsp;
+		</li>
+		<li>
+			<a class="S_menu3"></a>
+			<p>
+				收款
+			</p>
+		</li>
+		<li class="w_35">
+			&nbsp;
+		</li>
+		<li>
+			<a class="S_menu4"></a>
+			<p>
+				收货
+			</p>
+		</li>
+	</ul>
+</div>
+
+<div class="Tap_area">
+	<div ng-class="status==0?'Tap_choose':'Tap'" ng-click="status=0">
+		未处理
+	</div>
+	<a ng-class="status==1?'Tap_choose':'Tap'" ng-click="status=1">
+		已处理
+	</a>
+</div>
+<div class="space"></div><!--不能删,删了出错-->
+<div class="item_area"
+ng-swipe-left="showControl=true;swipeLeft=true;" ng-swipe-right="showControl=true;swipeLeft=false"
+ng-repeat="order in orders">
+	<div class="buyer" >
+		<Span class="name">{{order.customer}}</Span>
+		<span class="phone">{{order.mobilephone}}</span>
+	</div>
+	<div class="preduct" ng-repeat-start="detail in order.orderDetail">
+		<p class="P_title">
+			{{detail.productname}}
+		</p>
+		<p class="Price">
+			¥:{{detail.productprice}}
+			<br/>
+			{{detail.count}}件
+		</p>
+		<p ng-show="showControl" class="Bt_blue_area animated"
+		ng-class="swipeLeft===true?'fadeInRight':'fadeOutRight'">
+			<a ng-show="status==0" href="#" class="Bt_blue">
+				编辑
+			</a>
+			<a ng-show="status==1" href="#" class="Bt_blue">
+				查看
+			</a>
+			<a ng-show="status==0" href="#" class="Bt_blue">
+				删除
+			</a>
+		<p>
+	</div>
+	<p class="line1" ng-repeat-end></p>
+	<p class="red Price_all_area">
+		合计：¥ {{calculateTotal(order).price}} 元
+	</p>
+</div>

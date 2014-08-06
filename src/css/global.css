@@ -1,0 +1,61 @@
+/* CSS Document */
+*{ margin:0; padding:0;}
+body{ width:100%; color:#666; font-size:14px;}
+a img{border:none;}
+ul{list-style:none;}
+input{ color:#666;font-size:13px;}
+input:hover{outline:none;}/*���������Ϊ��,ĳЩ������»��и��ѿ��Ŀ�*/
+input:focus{outline:none;}/*���������Ϊ��,ĳЩ������»��и��ѿ��Ŀ�*/
+.Yahei{ font-family:Microsoft Yahei;}
+.body_grey{ width:100%;background:#F1F1F3;; position:absolute;top:0;left:0;min-height:100%;height:auto;}/*ҳ������Ϊ��100%�߶����*/
+.radius3{border-radius:3px;	behavior: url(ie-css3.htc);}/*Բ��*/
+
+/*ʶ���ֻ���������*/
+@media (max-width: 320px) {  }
+@media (min-width: 321px) and (max-width: 480px) {  }
+/*ʶ���ֻ���������*/
+
+
+/*ͷ�������ҽṹ*/
+#head_LMR{ height:35px;background:url(../image/bg_1.jpg) repeat-x; border-bottom:1px solid #fff;  border-top:1px solid #fff;text-align:center; padding-top:10px;}
+.p1{ float:left; padding-left:20px; color:#66FFFF; font-weight:bold; line-height:22px;}
+.p2{ }
+.p3{ float:right; padding-right:20px;}
+/*ͷ�������ҽṹ*/
+
+/*������ɫ*/
+.red{ color:#FF0000;}
+/*������ɫ*/
+
+/*���ð�ť*/
+.reback{display:block; width:24px; height:24px; background:url(../image/icon1.png) no-repeat;background-size:100%;}
+.reback:hover{ background:url(../image/icon1_on.png) no-repeat;background-size:100%;}
+.add{ display:block; width:25px; height:25px; background:url(../image/icon2.png) no-repeat;background-size:100%;}
+.add:hover{background:url(../image/icon2_on.png) no-repeat;background-size:100%;}
+.Bt_search{ display:block; float:left;width:24px; height:24px; background:url(../image/icon10.png) no-repeat center; background-size:100%;}
+.Bt_search:hover{background:url(../image/icon10_on.png) no-repeat center; background-size:100%;}
+.Bt_blue{ background:#299DE8;padding:5px 10px;border-radius:2px;behavior: url(ie-css3.htc); color:#FFF; text-decoration:none; margin-right:10px;}
+.Bt_blue:hover{ background:#177ABC;}
+/*���ð�ť*/
+
+
+/*���*/
+.w_195{ width:193px;}
+.w_30{ width:30px; }
+.w_35{ width:35px; }
+/*���*/
+
+/*marging*/
+.MarR_30{ margin-right:25px;}
+.MarB_30{ margin-bottom:25px;}
+/*marging*/
+
+/*�߿�*/
+.border_ccc{ border:1px solid #ccc}
+.border_none{ border:none;}
+.border_right{float:right; border-right:1px solid #fff; height:30px;}
+/*�߿�*/
+
+/*�ָ���*/
+.line1{ border-bottom:1px dashed #ccc; height:1px; line-height:1px;}
+/*�ָ���*/

@@ -1,0 +1,30 @@
+/* CSS Document */
+
+
+/*个人资料部分*/
+#self{width:100%; background:#fff; height:94px; padding-top:22px; }
+.figure{ padding:0 13px; float:left; display:block;}
+.self_content{ float:left; height:60px; font-size:13px; padding-top:8px;}
+.user_name{font-size:21px; margin-bottom:15px;}
+
+/*个人资料部分*/
+
+/*按钮模块,列表*/
+#big_menu_area{clear:both;}
+.big_menu{ width:210px; margin:0 auto; margin-top:35px;}
+.big_menu li{ float:left;}
+/*按钮模块,列表*/
+
+
+/*四个大按钮*/
+.m1,.m2,.m3,.m4{ display:block;width:90px; height:35px; border:1px solid #ccc;border-radius:3px;behavior: url(ie-css3.htc); text-align:center; text-decoration:none; color:#666; padding-top:55px;font-family:Microsoft Yahei;}
+.m1:hover,.m2:hover,.m3:hover,.m4:hover{border:1px solid #299DE8;}
+.m1{ background:#fff url(../image/icon6.png) no-repeat 22px 10px; background-size: 44px 44px; }
+.m1:hover{ background:#fff url(../image/icon6_on.png) no-repeat 22px 10px; background-size: 44px 44px;}
+.m2{ background:#fff url(../image/icon7.png) no-repeat 22px 12px; background-size: 44px 44px;}
+.m2:hover{ background:#fff url(../image/icon7_on.png) no-repeat 22px 12px; background-size: 44px 44px;}
+.m3{ background:#fff url(../image/icon8.png) no-repeat 22px 8px; background-size: 44px 44px;}
+.m3:hover{ background:#fff url(../image/icon8_on.png) no-repeat 22px 8px; background-size: 44px 44px;}
+.m4{ background:#fff url(../image/icon9.png) no-repeat 22px 12px; background-size: 44px 44px;}
+.m4:hover{ background:#fff url(../image/icon9_on.png) no-repeat 22px 12px; background-size: 44px 44px;}
+/*四个大按钮*/

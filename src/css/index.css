@@ -1,0 +1,21 @@
+/* CSS Document */
+
+/*中间模块*/
+#middle1{ width:100%; text-align:center; padding-top:100px;}
+#middle1 p{ margin:0 auto; width:230px; margin-bottom:15px;}
+/*中间模块*/
+
+/*输入筐*/
+.text2{border:1px solid #ccc; margin-bottom:15px; width:230px; height:32px; text-align:left; background:#fff;border-radius:3px;	behavior: url(ie-css3.htc);}
+.text2:hover{border:#4291DF 1px solid; }
+.blank1{border:none; float:left; height:32px; width:190px;color:#A4A4A4; font-size:13px;}
+.blank1:hover{border:none;}
+/*输入筐*/
+
+
+/*登陆按钮*/
+.login{ display:block;background:url(../image/botton1.png) no-repeat; width:230px; height:33px; line-height:33px; font-size:15px; color:#FFF; text-decoration:none;background-size:100%; border:none;}
+.login:hover{background:url(../image/botton1_on.png) no-repeat;width:230px; height:33px;background-size:100%;}
+/*登陆按钮*/
+
+
